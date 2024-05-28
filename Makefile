@@ -702,6 +702,7 @@ libs-y += drivers/usb/host/
 libs-y += drivers/usb/musb/
 libs-y += drivers/usb/musb-new/
 libs-y += drivers/usb/phy/
+libs-y += drivers/usb/tcpm/
 libs-y += drivers/usb/ulpi/
 libs-y += cmd/
 libs-y += common/
