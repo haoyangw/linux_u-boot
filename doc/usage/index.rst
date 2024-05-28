@@ -103,6 +103,7 @@ Shell commands
    cmd/sm
    cmd/sound
    cmd/source
+   cmd/tcpm
    cmd/temperature
    cmd/tftpput
    cmd/trace
