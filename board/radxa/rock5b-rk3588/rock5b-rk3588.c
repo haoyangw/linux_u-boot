@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0+
 /*
- * Copyright (c) 2023 Collabora Ltd.
+ * Copyright (c) 2023-2024 Collabora Ltd.
  */
 
 #include <fdtdec.h>
@@ -34,6 +34,8 @@ int rock5b_add_reserved_memory_fdt_nodes(void *new_blob)
 
 int ft_board_setup(void *blob, struct bd_info *bd)
 {
-	return rock5b_add_reserved_memory_fdt_nodes(blob);
+	int ret = rock5b_add_reserved_memory_fdt_nodes(blob);
+	if (IS_ENABLED(CONFIG_TYPEC_FUSB302))                     fdt_status_okay_by_compatible(blob, "fcs,fusb302");
+	return ret;
 }
 #endif
