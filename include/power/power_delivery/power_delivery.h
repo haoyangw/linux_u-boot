@@ -23,13 +23,6 @@ struct power_delivery_data {
 	int online;
 };
 
-#ifdef CONFIG_DM_POWER_DELIVERY
+int power_delivery_init(void);
 int power_delivery_get_data(struct udevice *dev, struct power_delivery_data *pd_data);
-#else
-inline int power_delivery_get_data(struct udevice *dev,
-				   struct power_delivery_data *pd_data)
-{
-	return -ENOSYS;
-}
-#endif
 #endif
