@@ -365,6 +365,28 @@ __weak int dm_scan_other(bool pre_reloc_only)
 	return 0;
 }
 
+static int dm_probe_devices(struct udevice *dev, bool pre_reloc_only)
+{
+	u32 mask = DM_FLAG_PROBE_AFTER_BIND;
+	u32 flags = dev->flags;
+	struct udevice *child;
+	int ret;
+
+	if (pre_reloc_only)
+		mask |= DM_FLAG_PRE_RELOC;
+
+	if ((flags & mask) == mask) {
+		ret = device_probe(dev);
+		if (ret)
+			return ret;
+	}
+
+	list_for_each_entry(child, &dev->child_head, sibling_node)
+		dm_probe_devices(child, pre_reloc_only);
+
+	return 0;
+}
+
 int dm_init_and_scan(bool pre_reloc_only)
 {
 	int ret;
@@ -392,7 +414,7 @@ int dm_init_and_scan(bool pre_reloc_only)
 	if (ret)
 		return ret;
 
-	return 0;
+	return dm_probe_devices(gd->dm_root, pre_reloc_only);
 }
 
 /* This is the root driver - all drivers are children of this */

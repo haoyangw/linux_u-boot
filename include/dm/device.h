@@ -62,6 +62,9 @@ struct driver_info;
  */
 #define DM_FLAG_OS_PREPARE		(1 << 10)
 
+/* Device must be probed after it was bound */
+#define DM_FLAG_PROBE_AFTER_BIND	(1 << 15)
+
 /* Device is from kernel dtb */
 #define DM_FLAG_KNRL_DTB		(1 << 31)
 
