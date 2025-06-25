@@ -10,6 +10,7 @@
 
 #ifdef CONFIG_OF_LIBFDT
 
+#include <asm/u-boot.h>
 #include <linux/libfdt.h>
 #include <abuf.h>
 
