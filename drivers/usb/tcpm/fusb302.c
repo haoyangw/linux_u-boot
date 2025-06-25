@@ -10,7 +10,7 @@
 #include <asm/gpio.h>
 #include <linux/delay.h>
 #include <linux/err.h>
-#include <dm/device_compat.h>
+#include <dm/device.h>
 #include <usb/tcpm.h>
 #include "fusb302_reg.h"
 

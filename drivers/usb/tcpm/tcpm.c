@@ -8,7 +8,7 @@
 #include <asm/gpio.h>
 #include <asm/io.h>
 #include <dm.h>
-#include <dm/device_compat.h>
+#include <dm/device.h>
 #include <dm/device-internal.h>
 #include <dm/devres.h>
 #include <linux/compat.h>

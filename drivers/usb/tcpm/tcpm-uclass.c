@@ -6,7 +6,6 @@
  */
 
 #include <dm/device.h>
-#include <dm/device_compat.h>
 #include <dm/uclass.h>
 #include <linux/err.h>
 #include <usb/tcpm.h>
