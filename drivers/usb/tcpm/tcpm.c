@@ -5,7 +5,7 @@
  * USB Power Delivery protocol stack.
  */
 
-#include <asm/gpio.h>
+#include <asm-generic/gpio.h>
 #include <asm/io.h>
 #include <dm.h>
 #include <dm/device.h>
