@@ -134,7 +134,7 @@ static int tcpm_post_bind(struct udevice *dev)
 
 	dev_info(dev, "probing Type-C port manager...");
 
-	dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
+	dev->flags |= DM_FLAG_PROBE_AFTER_BIND;
 
 	return 0;
 }
