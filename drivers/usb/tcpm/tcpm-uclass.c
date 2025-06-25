@@ -13,21 +13,21 @@
 
 int tcpm_get_voltage(struct udevice *dev)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	return port->supply_voltage;
 }
 
 int tcpm_get_current(struct udevice *dev)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	return port->current_limit;
 }
 
 enum typec_orientation tcpm_get_orientation(struct udevice *dev)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	switch (port->polarity) {
 	case TYPEC_POLARITY_CC1:
@@ -41,35 +41,35 @@ enum typec_orientation tcpm_get_orientation(struct udevice *dev)
 
 const char *tcpm_get_state(struct udevice *dev)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	return tcpm_states[port->state];
 }
 
 int tcpm_get_pd_rev(struct udevice *dev)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	return port->negotiated_rev;
 }
 
 enum typec_role tcpm_get_pwr_role(struct udevice *dev)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	return port->pwr_role;
 }
 
 enum typec_data_role tcpm_get_data_role(struct udevice *dev)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	return port->data_role;
 }
 
 bool tcpm_is_connected(struct udevice *dev)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	return port->connected;
 }

@@ -93,7 +93,7 @@ static inline bool tcpm_try_src(struct tcpm_port *port)
 
 static inline void tcpm_reset_event_cnt(struct udevice *dev)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	port->poll_event_cnt = 0;
 }
@@ -124,7 +124,7 @@ static bool tcpm_port_is_disconnected(struct tcpm_port *port)
 static void tcpm_set_cc(struct udevice *dev, enum typec_cc_status cc)
 {
 	const struct dm_tcpm_ops *drvops = dev_get_driver_ops(dev);
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	dev_dbg(dev, "TCPM: set cc = %d\n", cc);
 	port->cc_req = cc;
@@ -169,7 +169,7 @@ static void tcpm_check_and_run_delayed_work(struct udevice *dev);
 static bool tcpm_transmit_helper(struct udevice *dev)
 {
 	const struct dm_tcpm_ops *drvops = dev_get_driver_ops(dev);
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	drvops->poll_event(dev);
 	udelay(500);
@@ -182,7 +182,7 @@ static int tcpm_pd_transmit(struct udevice *dev,
 			    const struct pd_message *msg)
 {
 	const struct dm_tcpm_ops *drvops = dev_get_driver_ops(dev);
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	u32 timeout_us = PD_T_TCPC_TX_TIMEOUT * 1000;
 	bool tx_complete;
 	int ret;
@@ -233,7 +233,7 @@ static int tcpm_pd_transmit(struct udevice *dev,
 void tcpm_pd_transmit_complete(struct udevice *dev,
 			       enum tcpm_transmit_status status)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	dev_dbg(dev, "TCPM: PD TX complete, status: %u\n", status);
 	tcpm_reset_event_cnt(dev);
@@ -244,7 +244,7 @@ void tcpm_pd_transmit_complete(struct udevice *dev,
 static int tcpm_set_polarity(struct udevice *dev,
 			     enum typec_cc_polarity polarity)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	const struct dm_tcpm_ops *drvops = dev_get_driver_ops(dev);
 	int ret;
 
@@ -264,7 +264,7 @@ static int tcpm_set_polarity(struct udevice *dev,
 static int tcpm_set_vconn(struct udevice *dev, bool enable)
 {
 	const struct dm_tcpm_ops *drvops = dev_get_driver_ops(dev);
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	int ret;
 
 	dev_dbg(dev, "TCPM: set vconn = %d\n", enable);
@@ -291,7 +291,7 @@ static inline u32 tcpm_get_current_limit(struct tcpm_port *port)
 
 static int tcpm_set_current_limit(struct udevice *dev, u32 max_ma, u32 mv)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	int ret = -EOPNOTSUPP;
 
 	dev_info(dev, "TCPM: set voltage limit = %u mV\n", mv);
@@ -306,7 +306,7 @@ static int tcpm_set_current_limit(struct udevice *dev, u32 max_ma, u32 mv)
 static int tcpm_set_attached_state(struct udevice *dev, bool attached)
 {
 	const struct dm_tcpm_ops *drvops = dev_get_driver_ops(dev);
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	return drvops->set_roles(dev, attached, port->pwr_role,
 				 port->data_role);
@@ -316,7 +316,7 @@ static int tcpm_set_roles(struct udevice *dev, bool attached,
 			  enum typec_role role, enum typec_data_role data)
 {
 	const struct dm_tcpm_ops *drvops = dev_get_driver_ops(dev);
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	int ret;
 
 	ret = drvops->set_roles(dev, attached, role, data);
@@ -331,7 +331,7 @@ static int tcpm_set_roles(struct udevice *dev, bool attached,
 
 static int tcpm_pd_send_source_caps(struct udevice *dev)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	struct pd_message msg;
 	int i;
 
@@ -361,7 +361,7 @@ static int tcpm_pd_send_source_caps(struct udevice *dev)
 
 static int tcpm_pd_send_sink_caps(struct udevice *dev)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	struct pd_message msg;
 	unsigned int i;
 
@@ -393,14 +393,14 @@ static void tcpm_state_machine(struct udevice *dev);
 
 static inline void tcpm_timer_uninit(struct udevice *dev)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	port->delay_target = 0;
 }
 
 static void tcpm_timer_init(struct udevice *dev, uint32_t ms)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	unsigned long time_us = ms * 1000;
 
 	port->delay_target = timer_get_us() + time_us;
@@ -408,7 +408,7 @@ static void tcpm_timer_init(struct udevice *dev, uint32_t ms)
 
 static void tcpm_check_and_run_delayed_work(struct udevice *dev)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	/* no delayed state changes scheduled */
 	if (port->delay_target == 0)
@@ -435,7 +435,7 @@ static void mod_tcpm_delayed_work(struct udevice *dev, unsigned int delay_ms)
 static void tcpm_set_state(struct udevice *dev, enum tcpm_state state,
 			   unsigned int delay_ms)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	if (delay_ms) {
 		dev_dbg(dev, "TCPM: pending state change %s -> %s @ %u ms [%s]\n",
@@ -464,7 +464,7 @@ static void tcpm_set_state(struct udevice *dev, enum tcpm_state state,
 static void tcpm_set_state_cond(struct udevice *dev, enum tcpm_state state,
 				unsigned int delay_ms)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	if (port->enter_state == port->state)
 		tcpm_set_state(dev, state, delay_ms);
@@ -479,7 +479,7 @@ static void tcpm_set_state_cond(struct udevice *dev, enum tcpm_state state,
 static void tcpm_queue_message(struct udevice *dev,
 			       enum pd_msg_request message)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	port->queued_message = message;
 	mod_tcpm_delayed_work(dev, 0);
@@ -620,7 +620,7 @@ static void tcpm_pd_data_request(struct udevice *dev,
 				 const struct pd_message *msg)
 {
 	enum pd_data_msg_type type = pd_header_type_le(msg->header);
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	unsigned int cnt = pd_header_cnt_le(msg->header);
 	unsigned int rev = pd_header_rev_le(msg->header);
 	unsigned int i;
@@ -705,7 +705,7 @@ static void tcpm_pd_ctrl_request(struct udevice *dev,
 				 const struct pd_message *msg)
 {
 	enum pd_ctrl_msg_type type = pd_header_type_le(msg->header);
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	enum tcpm_state next_state;
 
 	switch (type) {
@@ -835,7 +835,7 @@ static void tcpm_pd_ctrl_request(struct udevice *dev,
 static void tcpm_pd_rx_handler(struct udevice *dev,
 			       const struct pd_message *msg)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	unsigned int cnt = pd_header_cnt_le(msg->header);
 	bool remote_is_host, local_is_host;
 
@@ -886,7 +886,7 @@ void tcpm_pd_receive(struct udevice *dev, const struct pd_message *msg)
 static int tcpm_pd_send_control(struct udevice *dev,
 				enum pd_ctrl_msg_type type)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	struct pd_message msg;
 
 	memset(&msg, 0, sizeof(msg));
@@ -905,7 +905,7 @@ static int tcpm_pd_send_control(struct udevice *dev,
  */
 static bool tcpm_send_queued_message(struct udevice *dev)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	enum pd_msg_request queued_message;
 	int max_messages = 100;
 
@@ -943,7 +943,7 @@ static bool tcpm_send_queued_message(struct udevice *dev)
 
 static int tcpm_pd_check_request(struct udevice *dev)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	u32 pdo, rdo = port->sink_request;
 	unsigned int max, op, pdo_max, index;
 	enum pd_pdo_type type;
@@ -1000,7 +1000,7 @@ static int tcpm_pd_check_request(struct udevice *dev)
 static int tcpm_pd_select_pdo(struct udevice *dev, int *sink_pdo,
 			      int *src_pdo)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	unsigned int i, j, max_src_mv = 0, min_src_mv = 0, max_mw = 0,
 		     max_mv = 0, src_mw = 0, src_ma = 0, max_snk_mv = 0,
 		     min_snk_mv = 0;
@@ -1086,7 +1086,7 @@ static int tcpm_pd_select_pdo(struct udevice *dev, int *sink_pdo,
 
 static int tcpm_pd_build_request(struct udevice *dev, u32 *rdo)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	unsigned int mv, ma, mw, flags;
 	unsigned int max_ma, max_mw;
 	enum pd_pdo_type type;
@@ -1167,7 +1167,7 @@ static int tcpm_pd_build_request(struct udevice *dev, u32 *rdo)
 
 static int tcpm_pd_send_request(struct udevice *dev)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	struct pd_message msg;
 	int ret;
 	u32 rdo;
@@ -1189,7 +1189,7 @@ static int tcpm_pd_send_request(struct udevice *dev)
 
 static int tcpm_set_vbus(struct udevice *dev, bool enable)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	const struct dm_tcpm_ops *drvops = dev_get_driver_ops(dev);
 	int ret;
 
@@ -1210,7 +1210,7 @@ static int tcpm_set_vbus(struct udevice *dev, bool enable)
 static int tcpm_set_charge(struct udevice *dev, bool charge)
 {
 	const struct dm_tcpm_ops *drvops = dev_get_driver_ops(dev);
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	int ret;
 
 	if (charge && port->vbus_source)
@@ -1231,7 +1231,7 @@ static int tcpm_set_charge(struct udevice *dev, bool charge)
 static bool tcpm_start_toggling(struct udevice *dev, enum typec_cc_status cc)
 {
 	const struct dm_tcpm_ops *drvops = dev_get_driver_ops(dev);
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	int ret;
 
 	if (!drvops->start_toggling)
@@ -1245,7 +1245,7 @@ static bool tcpm_start_toggling(struct udevice *dev, enum typec_cc_status cc)
 static int tcpm_init_vbus(struct udevice *dev)
 {
 	const struct dm_tcpm_ops *drvops = dev_get_driver_ops(dev);
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	int ret;
 
 	ret = drvops->set_vbus(dev, false, false);
@@ -1257,7 +1257,7 @@ static int tcpm_init_vbus(struct udevice *dev)
 static int tcpm_init_vconn(struct udevice *dev)
 {
 	const struct dm_tcpm_ops *drvops = dev_get_driver_ops(dev);
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	int ret;
 
 	ret = drvops->set_vconn(dev, false);
@@ -1274,7 +1274,7 @@ static inline void tcpm_typec_connect(struct tcpm_port *port)
 static int tcpm_src_attach(struct udevice *dev)
 {
 	const struct dm_tcpm_ops *drvops = dev_get_driver_ops(dev);
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	enum typec_cc_polarity polarity =
 				port->cc2 == TYPEC_CC_RD ? TYPEC_POLARITY_CC2
 							 : TYPEC_POLARITY_CC1;
@@ -1340,7 +1340,7 @@ static inline void tcpm_typec_disconnect(struct tcpm_port *port)
 static void tcpm_reset_port(struct udevice *dev)
 {
 	const struct dm_tcpm_ops *drvops = dev_get_driver_ops(dev);
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	tcpm_timer_uninit(dev);
 	tcpm_typec_disconnect(port);
@@ -1366,7 +1366,7 @@ static void tcpm_reset_port(struct udevice *dev)
 
 static void tcpm_detach(struct udevice *dev)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	if (tcpm_port_is_disconnected(port))
 		port->hard_reset_count = 0;
@@ -1384,7 +1384,7 @@ static void tcpm_src_detach(struct udevice *dev)
 
 static int tcpm_snk_attach(struct udevice *dev)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	int ret;
 
 	if (port->attached)
@@ -1445,7 +1445,7 @@ static inline enum tcpm_state unattached_state(struct tcpm_port *port)
 static void run_state_machine(struct udevice *dev)
 {
 	const struct dm_tcpm_ops *drvops = dev_get_driver_ops(dev);
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	int ret;
 
 	port->enter_state = port->state;
@@ -1820,7 +1820,7 @@ static void run_state_machine(struct udevice *dev)
 
 static void tcpm_state_machine(struct udevice *dev)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	enum tcpm_state prev_state;
 
 	mutex_lock(&port->lock);
@@ -1858,7 +1858,7 @@ done:
 static void _tcpm_cc_change(struct udevice *dev, enum typec_cc_status cc1,
 			    enum typec_cc_status cc2)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	enum typec_cc_status old_cc1, old_cc2;
 	enum tcpm_state new_state;
 
@@ -1958,7 +1958,7 @@ static void _tcpm_cc_change(struct udevice *dev, enum typec_cc_status cc1,
 
 static void _tcpm_pd_vbus_on(struct udevice *dev)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	dev_dbg(dev, "TCPM: VBUS on event\n");
 	port->vbus_present = true;
@@ -2004,7 +2004,7 @@ static void _tcpm_pd_vbus_on(struct udevice *dev)
 
 static void _tcpm_pd_vbus_off(struct udevice *dev)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	dev_dbg(dev, "TCPM: VBUS off event\n");
 	port->vbus_present = false;
@@ -2065,7 +2065,7 @@ void tcpm_vbus_change(struct udevice *dev)
 
 void tcpm_pd_hard_reset(struct udevice *dev)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	tcpm_reset_event_cnt(dev);
 	dev_dbg(dev, "TCPM: Received hard reset\n");
@@ -2089,7 +2089,7 @@ void tcpm_pd_hard_reset(struct udevice *dev)
 static void tcpm_init(struct udevice *dev)
 {
 	const struct dm_tcpm_ops *drvops = dev_get_driver_ops(dev);
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	enum typec_cc_status cc1, cc2;
 
 	drvops->init(dev);
@@ -2130,7 +2130,7 @@ static void tcpm_init(struct udevice *dev)
 static int tcpm_fw_get_caps(struct udevice *dev)
 {
 	const struct dm_tcpm_ops *drvops = dev_get_driver_ops(dev);
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	ofnode node;
 	const char *cap_str;
 	int ret;
@@ -2209,7 +2209,7 @@ sink:
 
 static int tcpm_port_init(struct udevice *dev)
 {
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 	int err;
 
 	err = tcpm_fw_get_caps(dev);
@@ -2231,7 +2231,7 @@ static int tcpm_port_init(struct udevice *dev)
 static void tcpm_poll_event(struct udevice *dev)
 {
 	const struct dm_tcpm_ops *drvops = dev_get_driver_ops(dev);
-	struct tcpm_port *port = dev_get_uclass_plat(dev);
+	struct tcpm_port *port = dev_get_uclass_platdata(dev);
 
 	if (!drvops->get_vbus(dev))
 		return;
