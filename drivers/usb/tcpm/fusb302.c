@@ -1319,5 +1319,5 @@ U_BOOT_DRIVER(fusb302) = {
 	.id = UCLASS_TCPM,
 	.of_match = fusb302_ids,
 	.ops = &fusb302_ops,
-	.priv_auto = sizeof(struct fusb302_chip),
+	.priv_auto_alloc_size = sizeof(struct fusb302_chip),
 };

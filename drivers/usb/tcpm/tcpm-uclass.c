@@ -142,7 +142,7 @@ static int tcpm_post_bind(struct udevice *dev)
 UCLASS_DRIVER(tcpm) = {
 	.id		= UCLASS_TCPM,
 	.name		= "tcpm",
-	.per_device_plat_auto	= sizeof(struct tcpm_port),
+	.per_device_platdata_auto_alloc_size	= sizeof(struct tcpm_port),
 	.post_bind	= tcpm_post_bind,
 	.post_probe	= tcpm_post_probe,
 };
