@@ -10,7 +10,6 @@
 #include <dm.h>
 #include <dm/device.h>
 #include <dm/device-internal.h>
-#include <dm/devres.h>
 #include <linux/compat.h>
 #include <linux/delay.h>
 #include <linux/err.h>
