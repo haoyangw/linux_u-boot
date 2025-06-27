@@ -1670,7 +1670,7 @@ int fdt_set_status_by_compatible(void *fdt, const char *compat,
 	if (offset < 0)
 		return offset;
 
-	return fdt_set_node_status(fdt, offset, status);
+	return fdt_set_node_status(fdt, offset, status, 0);
 }
 
 /**
@@ -1694,7 +1694,7 @@ int fdt_set_status_by_pathf(void *fdt, enum fdt_status status, const char *fmt,
 	if (offset < 0)
 		return offset;
 
-	return fdt_set_node_status(fdt, offset, status);
+	return fdt_set_node_status(fdt, offset, status, 0);
 }
 
 #if defined(CONFIG_VIDEO) || defined(CONFIG_LCD)
