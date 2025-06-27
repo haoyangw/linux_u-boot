@@ -14,7 +14,7 @@
 
 static struct udevice *currdev;
 
-static int do_dev(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+static int do_dev(cmd_tbl_t *cmdtp, int flag, int argc, char *const argv[])
 {
 	int devnum, ret;
 
@@ -38,7 +38,7 @@ static int do_dev(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
 	return CMD_RET_SUCCESS;
 }
 
-static int do_list(struct cmd_tbl *cmdtp, int flag, int argc,
+static int do_list(cmd_tbl_t *cmdtp, int flag, int argc,
 		   char *const argv[])
 {
 	struct udevice *dev;
@@ -94,7 +94,7 @@ int do_print_info(struct udevice *dev)
 	return 0;
 }
 
-static int do_info(struct cmd_tbl *cmdtp, int flag, int argc,
+static int do_info(cmd_tbl_t *cmdtp, int flag, int argc,
 		   char *const argv[])
 {
 	if (!currdev) {
@@ -105,16 +105,16 @@ static int do_info(struct cmd_tbl *cmdtp, int flag, int argc,
 	return do_print_info(currdev);
 }
 
-static struct cmd_tbl subcmd[] = {
+static cmd_tbl_t subcmd[] = {
 	U_BOOT_CMD_MKENT(dev, 2, 1, do_dev, "", ""),
 	U_BOOT_CMD_MKENT(list, 1, 1, do_list, "", ""),
 	U_BOOT_CMD_MKENT(info, 1, 1, do_info, "", ""),
 };
 
-static int do_tcpm(struct cmd_tbl *cmdtp, int flag, int argc,
+static int do_tcpm(cmd_tbl_t *cmdtp, int flag, int argc,
 		   char *const argv[])
 {
-	struct cmd_tbl *cmd;
+	cmd_tbl_t *cmd;
 
 	argc--;
 	argv++;
