@@ -20,7 +20,7 @@ static int do_dev(cmd_tbl_t *cmdtp, int flag, int argc, char *const argv[])
 
 	switch (argc) {
 	case 2:
-		devnum = (int)dectoul(argv[1], NULL);
+		devnum = (int)simple_strtoul(argv[1], NULL, 10);
 		ret = tcpm_get(devnum, &currdev);
 		if (ret) {
 			log_err("Can't get TCPM %d: %d (%s)!\n", devnum, ret, errno_str(ret));
