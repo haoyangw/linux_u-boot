@@ -5,3 +5,4 @@
 #
 
 obj-y	+= evb_rk3588.o
+obj-$(CONFIG_TARGET_IS_ROCK5B) += rock-5b.o

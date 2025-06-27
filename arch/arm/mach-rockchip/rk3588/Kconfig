@@ -6,6 +6,14 @@ config TARGET_EVB_RK3588
 	help
 	  RK3588 EVB is a evaluation board for Rockchp RK3588.
 
+config TARGET_IS_ROCK5B
+	bool "Radxa ROCK 5B board"
+	help
+	  Radxa ROCK5B is a Rockchip RK3588 based SBC (Single Board Computer)
+	  by Radxa.
+
+	  This enables board-specific logic for the Radxa ROCK5B.
+
 config SYS_SOC
 	default "rockchip"
 
