@@ -32,7 +32,7 @@ static int do_dev(cmd_tbl_t *cmdtp, int flag, int argc, char *const argv[])
 			return CMD_RET_USAGE;
 		}
 
-		printf("dev: %d @ %s\n", dev_seq(currdev), currdev->name);
+		printf("dev: %d @ %s\n", currdev->seq, currdev->name);
 	}
 
 	return CMD_RET_SUCCESS;
@@ -55,10 +55,10 @@ static int do_list(cmd_tbl_t *cmdtp, int flag, int argc,
 			err = ret;
 
 		printf("| %2d | %-*.*s| %-*.*s| %s @ %d | status: %i\n",
-		       dev_seq(dev),
+		       dev->seq,
 		       LIMIT_DEV, LIMIT_DEV, dev->name,
 		       LIMIT_PARENT, LIMIT_PARENT, dev->parent->name,
-		       dev_get_uclass_name(dev->parent), dev_seq(dev->parent),
+		       dev_get_uclass_name(dev->parent), dev->parent->seq,
 		       ret);
 	}
 
