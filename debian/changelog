@@ -1,3 +1,11 @@
+u-boot-radxa-rk3588 (2017.09+20241108.git22849bf1-2) jammy; urgency=medium
+
+  * debian: Update maintainer and source repository URL
+  * debian: Disable building unsupported boards and disable their associated
+    Debian patches
+
+ -- Wang Haoyang <haoyangw@gmail.com>  Sat, 28 Jun 2025 21:03:14 +0800
+
 u-boot-radxa-rk3588 (2017.09+20241108.git22849bf1-1) jammy; urgency=medium
 
   * configs: Enable TCPM and FUSB302 driver for Radxa Rock 5B
