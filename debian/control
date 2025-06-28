@@ -2,9 +2,9 @@ Source: u-boot-radxa-rk3588
 Section: admin
 Priority: optional
 Standards-Version: 4.6.0
-Maintainer: Joshua Riek <jjriek@verizon.net>
+Maintainer: Wang Haoyang <haoyangw@gmail.com>
 Build-Depends: debhelper-compat (= 12), parted, gcc, make, bc, bison, python3, flex, device-tree-compiler, udev
-Vcs-Git: https://github.com/radxa/u-boot.git
+Vcs-Git: https://github.com/haoyangw/linux_u-boot.git
 
 Package: u-boot-rock-5d
 Architecture: arm64
