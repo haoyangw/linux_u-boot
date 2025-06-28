@@ -1,6 +1,16 @@
 # Target platforms supported by u-boot.
 # debian/rules includes this Makefile snippet.
 
+u-boot-rockchip_platforms += rock-3a-rk3568
+rock-3a-rk3568_ddr := rk3568_ddr_1560MHz_v1.23.bin
+rock-3a-rk3568_bl31 := rk3568_bl31_v1.44.elf
+rock-3a-rk3568_pkg := rock-3a
+
+u-boot-rockchip_platforms += rock-3b-rk3568
+rock-3b-rk3568_ddr := rk3568_ddr_1560MHz_v1.23.bin
+rock-3b-rk3568_bl31 := rk3568_bl31_v1.44.elf
+rock-3b-rk3568_pkg := rock-3b
+
 u-boot-rockchip_platforms += rock-5b-rk3588
 rock-5b-rk3588_ddr := rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.16.bin
 rock-5b-rk3588_bl31 := rk3588_bl31_v1.45.elf
