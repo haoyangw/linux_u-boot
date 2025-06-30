@@ -1,3 +1,10 @@
+u-boot-radxa-rk3588 (2017.09+20241108.git22849bf1-2) jammy; urgency=medium
+
+  * debian: Disable patches related to unsupported boards
+  * debian: Disable targets for unsupported boards
+
+ -- Wang Haoyang <haoyangw@gmail.com>  Mon, 30 Jun 2025 18:56:26 +0800
+
 u-boot-radxa-rk3588 (2017.09+20241108.git22849bf1-1) jammy; urgency=medium
 
   * Pull latest changes from upstream radxa/u-boot repository, listed below:
