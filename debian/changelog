@@ -1,3 +1,31 @@
+u-boot-radxa-rk3588 (2017.09+20241108.git22849bf1-1) jammy; urgency=medium
+
+  * Pull latest changes from upstream radxa/u-boot repository, listed below:
+
+  * add rk3588 fxblox-rk1 board
+  * arm: dts: cm3j: use GPIO0_B4 for for led_sys
+  * rock-5b-plus: force to boot from eMMC when recovery pin is shorted to ground
+  * dts: rock-5t: change user led to GPIO0_A0
+  * driver: add a way to load logo from config partition
+  * rockchip: rk3588: write MMU600PHP registers after running spl
+  * rockchip: rk3588: Increase the MMU600PHP QOS to 4 for USB3_2
+  * arm: dts: rock-2: Enable m.2 e-key pcie for E24C
+  * configs: rock 2: Enable PCIE NVME
+  * dts: rockchip: rk3528: PCIe change to use 32bits dbi base address
+  * configs: add rock 3a sata defconfig
+  * arm: dts: rockchip: add rock 3a m.2 e-key sata dts
+  * arm: dts: nx5 io: enable state_led and user_led
+  * configs: defconfig: add CONFIG_ID_EEPROM
+  * arm: dts: rockchip: enable m.2 e-key pcie for Radxa ROCK 3A
+  * backport: mtd: spi-nor-ids: Add Winbond W25Q128JW ID
+  * board: evb_rk3588: add startup by reading HW_ID
+  * arm: dts: add rk3588-rock-5t
+  * configs: add rock-5t-rk3588_defconfig
+  * configs: add radxa-e54c-rk3588s_defconfig
+  * arm: dts: add radxa-e54c
+
+ -- Wang Haoyang <haoyangw@gmail.com>  Mon, 30 Jun 2025 18:38:49 +0800
+
 u-boot-radxa-rk3588 (2017.09+20240806.gitf73b1eed-2) jammy; urgency=medium
 
   * Revert "rockchip: resource: Add avb verify"
