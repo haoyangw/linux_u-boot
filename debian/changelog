@@ -1,3 +1,10 @@
+u-boot-radxa-rk35xx (2017.09+20241108.git22849bf1-3) jammy; urgency=medium
+
+  * debian: Fix building u-boot for non-RK3588 boards
+  * debian: Add targets for Radxa Rock 3A, 3B and 3C
+
+ -- Wang Haoyang <haoyangw@gmail.com>  Thu, 03 Jul 2025 17:57:14 +0800
+
 u-boot-radxa-rk3588 (2017.09+20241108.git22849bf1-2) jammy; urgency=medium
 
   * debian: Disable patches related to unsupported boards
