@@ -11,6 +11,11 @@ rock-3b-rk3568_ddr := rk3568_ddr_1560MHz_v1.23.bin
 rock-3b-rk3568_bl31 := rk3568_bl31_v1.44.elf
 rock-3b-rk3568_pkg := rock-3b
 
+u-boot-rockchip_platforms += rock-3c-rk3566
+rock-3c-rk3566_ddr := rk3566_ddr_1056MHz_v1.23.bin
+rock-3c-rk3566_bl31 := rk3568_bl31_v1.44.elf
+rock-3c-rk3566_pkg := rock-3c
+
 u-boot-rockchip_platforms += rock-5b-rk3588
 rock-5b-rk3588_ddr := rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.16.bin
 rock-5b-rk3588_bl31 := rk3588_bl31_v1.45.elf
