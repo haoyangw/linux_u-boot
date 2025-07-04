@@ -15,3 +15,4 @@
 #0014-board-rockchip-Add-the-ArmSoM-AIM7.patch
 #0015-board-add-roc-rk3588s-pc-support.patch
 0016-add-rock-3b-board-support.patch
+0017-config-disable-optee-support-for-radxa-boards.patch
