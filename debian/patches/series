@@ -16,5 +16,7 @@
 #0015-board-add-roc-rk3588s-pc-support.patch
 0016-add-rock-3b-board-support.patch
 0017-config-disable-optee-support-for-radxa-boards.patch
-0018-rockchip-dts-rk3566-add-basic-dtsi.patch
-0019-arm-dts-rk3566-use-rk3566-dtsi.patch
+0018-arm-dts-add-radxa-zero3-dts.patch
+0019-configs-add-radxa-zero3-defconfig.patch
+0020-rockchip-dts-rk3566-add-basic-dtsi.patch
+0021-arm-dts-rk3566-use-rk3566-dtsi.patch
