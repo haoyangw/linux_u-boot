@@ -19,6 +19,12 @@ rock-3c-rk3566_bl31 := rk3568_bl31_v1.44.elf
 rock-3c-rk3566_mkimage-soc := rk3568
 rock-3c-rk3566_pkg := rock-3c
 
+u-boot-rockchip_platforms += radxa-zero3-rk3566
+radxa-zero3-rk3566_ddr := rk3566_ddr_1056MHz_v1.23.bin
+radxa-zero3-rk3566_bl31 := rk3568_bl31_v1.44.elf
+radxa-zero3-rk3566_mkimage-soc := rk3568
+radxa-zero3-rk3566_pkg := radxa-zero3
+
 u-boot-rockchip_platforms += rock-5b-rk3588
 rock-5b-rk3588_ddr := rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.16.bin
 rock-5b-rk3588_bl31 := rk3588_bl31_v1.45.elf
