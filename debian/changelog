@@ -1,3 +1,14 @@
+u-boot-radxa-rk35xx (2017.09+20241108.git22849bf1-4) noble; urgency=medium
+
+  * Set Ubuntu Noble as the target distribution in source package.
+  * Add build support for Radxa Zero 3.
+  * Update patch for RK3566 devices.
+  * Add basic Radxa Zero 3 support.
+  * Add device tree improvements for RK3566.
+  * Disable OPTEE support for Radxa boards.
+
+ -- Wang Haoyang <haoyangw@gmail.com>  Wed, 16 Jul 2025 11:57:14 +0800
+
 u-boot-radxa-rk35xx (2017.09+20241108.git22849bf1-3) jammy; urgency=medium
 
   * debian: Fix building u-boot for non-RK3588 boards
