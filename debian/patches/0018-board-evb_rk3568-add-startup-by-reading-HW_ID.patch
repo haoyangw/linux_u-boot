@@ -1,22 +1,11 @@
-From 85eee20efee9c19effdc51d86361b6904093c849 Mon Sep 17 00:00:00 2001
-From: Mitchell Ma <machuang@radxa.com>
-Date: Thu, 3 Apr 2025 18:41:48 +0800
-Subject: [PATCH] board: evb_rk3568: add startup by reading HW_ID
-
-Signed-off-by: Mitchell Ma <machuang@radxa.com>
----
- board/rockchip/evb_rk3568/evb_rk3568.c | 84 ++++++++++++++++++++++++++
- 1 file changed, 84 insertions(+)
-
 diff --git a/board/rockchip/evb_rk3568/evb_rk3568.c b/board/rockchip/evb_rk3568/evb_rk3568.c
-index 8750ecc3dda..2d36072800d 100644
+index 781d848374a..e154a4a5216 100644
 --- a/board/rockchip/evb_rk3568/evb_rk3568.c
 +++ b/board/rockchip/evb_rk3568/evb_rk3568.c
-@@ -11,9 +11,28 @@
- #include <asm/io.h>
- #include <asm/arch-rockchip/cpu.h>
- #include <rockusb.h>
-+#include <common.h>
+@@ -7,9 +7,27 @@
+ #include <common.h>
+ #include <dwc3-uboot.h>
+ #include <usb.h>
 +#include <dm.h>
 +#include <adc.h>
 +#include <asm-generic/global_data.h>
@@ -39,11 +28,11 @@ index 8750ecc3dda..2d36072800d 100644
 +};
 +
  #ifdef CONFIG_USB_DWC3
- #define CRU_BASE		0xfdd20000
- #define CRU_SOFTRST_CON09	0x0424
-@@ -89,3 +108,68 @@ int board_usb_cleanup(int index, enum usb_init_type init)
- #endif
- 
+ static struct dwc3_device dwc3_device_data = {
+ 	.maximum_speed = USB_SPEED_HIGH,
+@@ -31,3 +49,68 @@ int board_usb_init(int index, enum usb_init_type init)
+ 	return dwc3_uboot_init(&dwc3_device_data);
+ }
  #endif
 +
 +#ifdef CONFIG_ID_EEPROM
