@@ -1,3 +1,11 @@
+u-boot-radxa-rk35xx (2017.09+20241108.git22849bf1-5) noble; urgency=medium
+
+  * Fix issue with applying patch for adding CONFIG_ID_EEPROM support to
+    RK356x.
+  * Add support for setting fdtfile based on MAC address for RK356x.
+
+ -- Wang Haoyang <haoyangw@gmail.com>  Wed, 16 Jul 2025 13:12:27 +0800
+
 u-boot-radxa-rk35xx (2017.09+20241108.git22849bf1-4) noble; urgency=medium
 
   * Set Ubuntu Noble as the target distribution in source package.
